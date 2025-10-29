@@ -33,17 +33,17 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                echo " Building version ${APP_VERSION} for ${params.ENVIRONMENT} environment"
-                sh '''
-                    echo "Simulating build process..."
-                    mkdir -p build
-                    cp *.js build/
-                    echo "Build completed successfully!"
-                    echo "App version: ${APP_VERSION}" > build/version.txt
-                '''
-            }
-        }
+           steps {
+        echo " Building version ${APP_VERSION} for ${params.ENVIRONMENT} environment"
+        sh '''
+            echo "Simulating build process..."
+            mkdir -p build
+            cp -r src/* build/
+            echo "Build completed successfully!"
+            echo "App version: ${APP_VERSION}" > build/version.txt
+        '''
+    }
+}
 
         stage('Test') {
             when {
